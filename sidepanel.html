@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>TeamConnect</title>
+
+<style>
+:root{
+  --bg:#0b0f19;
+  --card:#151d30;
+  --card2:#111827;
+  --border:#263653;
+  --primary:#2563eb;
+  --primary2:#1d4ed8;
+  --cyan:#38bdf8;
+  --green:#22c55e;
+  --yellow:#facc15;
+  --red:#ef4444;
+  --text:#f8fafc;
+  --muted:#94a3b8;
+}
+
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  padding:12px;
+  font-size:13px;
+  min-height:100vh;
+}
+
+::-webkit-scrollbar{
+  width:5px;
+}
+
+::-webkit-scrollbar-thumb{
+  background:#334155;
+  border-radius:10px;
+}
+
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding-bottom:10px;
+  margin-bottom:12px;
+  border-bottom:1px solid var(--border);
+}
+
+.brand{
+  font-size:17px;
+  font-weight:800;
+  color:var(--cyan);
+}
+
+.badge{
+  padding:4px 9px;
+  border-radius:20px;
+  background:#0369a1;
+  color:#fff;
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:.4px;
+}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--border);
+  border-radius:10px;
+  padding:12px;
+  margin-bottom:10px;
+}
+
+.title{
+  color:var(--muted);
+  font-size:11px;
+  font-weight:800;
+  text-transform:uppercase;
+  letter-spacing:.5px;
+  margin-bottom:9px;
+}
+
+label{
+  display:block;
+  color:var(--muted);
+  font-size:11px;
+  margin-top:7px;
+}
+
+input,
+select,
+textarea{
+  width:100%;
+  margin-top:4px;
+  background:var(--bg);
+  border:1px solid var(--border);
+  color:#fff;
+  border-radius:7px;
+  padding:9px;
+  outline:none;
+  font-size:12px;
+}
+
+input:focus,
+select:focus,
+textarea:focus{
+  border-color:var(--primary);
+}
+
+.grid2{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+
+.action-box{
+  border:1px solid var(--border);
+  background:var(--card2);
+  border-radius:9px;
+  padding:18px 8px;
+  text-align:center;
+  cursor:pointer;
+  transition:.15s;
+}
+
+.action-box:hover{
+  border-color:var(--primary);
+  transform:translateY(-1px);
+}
+
+.action-icon{
+  display:block;
+  font-size:25px;
+  margin-bottom:7px;
+}
+
+.action-label{
+  font-weight:700;
+  font-size:12px;
+}
+
+.network-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+  margin-top:8px;
+}
+
+.network-box{
+  border:1px solid var(--border);
+  background:var(--card2);
+  border-radius:8px;
+  padding:10px;
+  cursor:pointer;
+}
+
+.network-box.active{
+  border-color:var(--primary);
+  background:#172554;
+}
+
+.network-name{
+  font-weight:800;
+  font-size:12px;
+}
+
+.network-desc{
+  color:var(--muted);
+  font-size:10px;
+  margin-top:4px;
+  line-height:1.35;
+}
+
+.info{
+  margin-top:8px;
+  padding:8px;
+  background:var(--bg);
+  border-radius:7px;
+  color:var(--muted);
+  font-size:10px;
+  line-height:1.45;
+}
+
+.btn{
+  width:100%;
+  border:0;
+  border-radius:7px;
+  padding:9px;
+  margin-top:8px;
+  cursor:pointer;
+  font-weight:800;
+  font-size:12px;
+}
+
+.primary{
+  background:var(--primary);
+  color:#fff;
+}
+
+.primary:hover{
+  background:var(--primary2);
+}
+
+.secondary{
+  background:#334155;
+  color:#fff;
+}
+
+.danger{
+  background:#7f1d1d;
+  color:#fff;
+}
+
+.hidden{
+  display:none!important;
+}
+
+.otp{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin-top:8px;
+}
+
+.otp input{
+  width:38px;
+  height:42px;
+  text-align:center;
+  font-size:18px;
+  font-weight:800;
+  padding:0;
+}
+
+.room-code{
+  display:flex;
+  justify-content:center;
+  gap:6px;
+  margin:9px 0;
+}
+
+.room-digit{
+  width:36px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:var(--bg);
+  border:1px solid var(--primary);
+  border-radius:7px;
+  color:var(--cyan);
+  font-size:18px;
+  font-weight:900;
+}
+
+.room-id{
+  text-align:center;
+  color:var(--muted);
+  font-size:10px;
+}
+
+.member{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:8px;
+  margin-top:5px;
+  background:var(--bg);
+  border-radius:6px;
+}
+
+.member-name{
+  font-weight:700;
+}
+
+.online{
+  color:var(--green);
+  font-size:10px;
+}
+
+.quick-share{
+  border:1px dashed #3b82f6;
+  background:#0f1d36;
+  border-radius:9px;
+  padding:12px;
+  margin-top:8px;
+}
+
+.dropzone{
+  border:1px dashed #475569;
+  border-radius:8px;
+  padding:17px 8px;
+  text-align:center;
+  color:var(--muted);
+  cursor:pointer;
+  margin-top:8px;
+}
+
+.dropzone.drag{
+  border-color:var(--cyan);
+  background:#082f49;
+  color:#fff;
+}
+
+.share-buttons{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+  margin-top:7px;
+}
+
+.share-buttons button{
+  background:#1e293b;
+  border:1px solid var(--border);
+  color:#fff;
+  padding:8px;
+  border-radius:6px;
+  cursor:pointer;
+  font-size:11px;
+}
+
+.feed{
+  background:var(--card2);
+  border-left:3px solid var(--cyan);
+  border-radius:7px;
+  padding:9px;
+  margin-top:7px;
+}
+
+.feed-head{
+  color:var(--yellow);
+  font-weight:800;
+  font-size:10px;
+}
+
+.feed-body{
+  margin-top:5px;
+  font-size:11px;
+  word-break:break-word;
+}
+
+.feed button{
+  margin-top:6px;
+  background:#334155;
+  border:0;
+  color:#fff;
+  border-radius:5px;
+  padding:6px 8px;
+  cursor:pointer;
+  font-size:10px;
+}
+
+.progress{
+  height:5px;
+  background:#1e293b;
+  border-radius:5px;
+  margin-top:7px;
+  overflow:hidden;
+}
+
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:var(--cyan);
+  transition:.1s;
+}
+
+.status{
+  text-align:center;
+  color:var(--muted);
+  font-size:10px;
+  margin-top:7px;
+}
+
+.screen-preview{
+  width:100%;
+  border-radius:7px;
+  margin-top:8px;
+  display:none;
+}
+
+.view{
+  display:none;
+}
+
+.view.active{
+  display:block;
+}
+
+#toast{
+  position:fixed;
+  bottom:12px;
+  left:50%;
+  transform:translateX(-50%);
+  background:var(--green);
+  color:#000;
+  padding:7px 13px;
+  border-radius:20px;
+  font-weight:800;
+  font-size:10px;
+  display:none;
+  z-index:999;
+}
+</style>
+</head>
+
+<body>
+
+<div class="header">
+  <div class="brand">🔗 TeamConnect</div>
+  <div id="net-badge" class="badge">LAN MODE</div>
+</div>
+
+<div id="toast"></div>
+
+<!-- LOBBY -->
+<div id="lobby" class="view active">
+
+  <div class="card">
+    <div class="title">User Profile</div>
+
+    <label>Display Name</label>
+    <input id="username" placeholder="Enter your name">
+
+    <div class="title" style="margin-top:12px">Network</div>
+
+    <div class="network-grid">
+
+      <div id="lan-box" class="network-box active">
+        <div class="network-name">📡 LAN / Hotspot</div>
+        <div class="network-desc">
+          Direct local team connection.
+          Lead creates the room.
+        </div>
+      </div>
+
+      <div id="cloud-box" class="network-box">
+        <div class="network-name">☁️ Cloud Relay</div>
+        <div class="network-desc">
+          Internet-based team connection.
+          No server address required.
+        </div>
+      </div>
+
+    </div>
+
+    <div id="network-info" class="info">
+      Lead: turn on Windows Mobile Hotspot and run the TeamConnect server.
+      Other members connect to the hotspot and use the Team Code.
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="title">Room Options</div>
+
+    <div class="grid2">
+
+      <div id="create-room" class="action-box">
+        <span class="action-icon">➕</span>
+        <span class="action-label">Create Room</span>
+      </div>
+
+      <div id="join-room" class="action-box">
+        <span class="action-icon">🚪</span>
+        <span class="action-label">Join Room</span>
+      </div>
+
+    </div>
+
+    <div id="join-panel" class="hidden">
+      <label>Enter 6-Digit Team Code</label>
+
+      <div class="otp">
+        <input class="otpbox" maxlength="1">
+        <input class="otpbox" maxlength="1">
+        <input class="otpbox" maxlength="1">
+        <input class="otpbox" maxlength="1">
+        <input class="otpbox" maxlength="1">
+        <input class="otpbox" maxlength="1">
+      </div>
+
+      <div class="status">
+        Enter the 6th digit to join automatically.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ROOM -->
+<div id="room" class="view">
+
+  <div class="card">
+
+    <div class="title">
+      Active Team
+      <span style="float:right;color:#22c55e">● ONLINE</span>
+    </div>
+
+    <div class="room-id">
+      TEAM CODE
+    </div>
+
+    <div id="room-code" class="room-code"></div>
+
+    <div class="quick-share">
+
+      <div class="title" style="color:#38bdf8">
+        ⚡ Quick Share
+      </div>
+
+      <div id="quick-preview" class="info">
+        Select text on a webpage, copy something, paste here,
+        or drag content/files below.
+      </div>
+
+      <div id="dropzone" class="dropzone">
+        📂 Drag & Drop files, images, text or URLs here
+        <br>
+        <small>or click to choose files</small>
+      </div>
+
+      <input id="file-input" type="file" multiple class="hidden">
+
+      <div class="share-buttons">
+        <button id="send-page">🌐 Current Page</button>
+        <button id="paste-btn">📋 Paste</button>
+        <button id="send-text">📝 Send Text</button>
+        <button id="screen-btn">🖥️ Screen Share</button>
+      </div>
+
+      <button id="send-url" class="btn primary">
+        🔗 Share Current URL
+      </button>
+
+      <div id="screen-status" class="status"></div>
+      <img id="screen-preview" class="screen-preview">
+
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="title">
+      Active Members
+      <span id="member-count" class="badge">0</span>
+    </div>
+
+    <div id="members"></div>
+  </div>
+
+  <div class="card">
+    <div class="title">Live Shared Feed</div>
+    <div id="feed"></div>
+  </div>
+
+  <button id="leave" class="btn danger">
+    Leave Room
+  </button>
+
+</div>
+
+<script src="sidepanel.js"></script>
+</body>
+</html>

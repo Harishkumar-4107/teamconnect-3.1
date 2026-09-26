@@ -1,0 +1,12 @@
+{
+  "name": "teamconnect",
+  "version": "3.1.0",
+  "description": "TeamConnect encrypted collaboration relay",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
+}
