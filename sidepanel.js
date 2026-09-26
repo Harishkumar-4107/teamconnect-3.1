@@ -35,7 +35,7 @@ const LAN_HOSTS = [
 
 const CHUNK_SIZE = 48 * 1024;
 
-let ws = null;
+
 let username = "User";
 let roomCode = "";
 let networkMode = "lan";
