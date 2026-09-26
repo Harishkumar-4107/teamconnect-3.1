@@ -19,8 +19,7 @@
  * - Screen snapshot sharing
  */
 
-const CLOUD_RELAY_URL =
-  "wss://YOUR-TEAMCONNECT-SERVER.onrender.com";
+const CLOUD_WS = "wss://teamconnect-3-1.onrender.com";
 
 const LAN_PORT = 8080;
 
